@@ -1,11 +1,31 @@
 
 var canvas = document.getElementById("mainCanvas");
+var c = canvas.getContext("2d");
 
-function drawPlayer() {
-    let player = canvas.getContext("2d");
 
-    player.beginPath();
-    player.arc(95, 50, 40, 0, 2 * Math.PI);
-    player.stroke();
+class Player {
+
+    constructor(x, y, radius, colour) {
+
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.colour = colour;
+
+    }
+
+    draw() {
+
+
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        c.fillStyle = this.colour;
+        c.fill();
+        c.stroke();
+
+    }
 
 }
+
+const player = new Player(50, 45, 7, "green");
+player.draw();
