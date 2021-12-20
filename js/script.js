@@ -27,5 +27,13 @@ class Player {
 
 }
 
-const player = new Player(50, 45, 7, "green");
-player.draw();
+
+
+let move = () => {
+    for(let i = 0; i < 100; i++) {
+
+        const player = new Player(i, 45, 7, "red");
+        player.draw();
+
+    }
+}
