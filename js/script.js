@@ -24,6 +24,21 @@ class Player {
 
     }
 
+    oscillate() {
+
+        changeFill = () => {
+            c.beginPath();
+            c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+            c.fillStyle = "green";
+            c.fill();
+            c.stroke();
+
+        }
+
+        setTimeout(changeFill, 10)
+
+    }
+
 }
 
 
@@ -33,6 +48,8 @@ let move = () => {
     player.draw();
 
 }
+
+
 let x = canvas.width / 2;
 let y = canvas.height / 2;
 //Player start position
