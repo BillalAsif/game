@@ -28,12 +28,13 @@ class Player {
 
 
 let move = () => {
-    
-        const player = new Player(i, 45, 7, "red");
-        player.draw();
+
+    const player = new Player(i, 45, 7, "red");
+    player.draw();
 
 }
-
+let x = canvas.width / 2;
+let y = canvas.height / 2;
 //Player start position
-const player = new Player(500, 400, 20, "red");
+const player = new Player(x, y, 20, "red");
 player.draw();
