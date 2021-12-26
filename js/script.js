@@ -26,16 +26,13 @@ class Player {
 
     oscillate() {
 
-        changeFill = () => {
-            c.beginPath();
-            c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-            c.fillStyle = "green";
+        var randomColour = Math.floor(Math.random() * 16777215).toString(16);
+
+        setTimeout(() => {
+            c.fillStyle = "#" + randomColour;
             c.fill();
             c.stroke();
-
-        }
-
-        setTimeout(changeFill, 10)
+        }, 1000)
 
     }
 
