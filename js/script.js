@@ -39,10 +39,9 @@ class Player {
 }
 
 
-let move = () => {
+let randomEnemies = () => {
 
-    const player = new Player(i, 45, 7, "red");
-    player.draw();
+    //creates circles randomly
 
 }
 
