@@ -58,8 +58,8 @@ function randomEnemies() {
         const randomArr = arr[random];
         return randomArr;
     }
-    const randomX = window.innerHeight / Math.floor(Math.random() * 10);
-    const randomY = window.innerWidth / Math.floor(Math.random() * 10);
+    const randomX = Math.floor(window.innerHeight / Math.floor(Math.random() * 10));
+    const randomY = Math.floor(window.innerWidth / Math.floor(Math.random() * 10));
     const randomSize = randomNum();
     const randomSixDigit = Math.floor(Math.random() * 16777215).toString(16);
     const randomColour = "#" + randomSixDigit;
