@@ -1,12 +1,6 @@
 
 var canvas = document.getElementById("mainCanvas");
 var c = canvas.getContext("2d");
-/* window.addEventListener('load', resize())
-window.addEventListener('resize', () => {
-    resize();
-    drawPlayer();
-}, true); */
-
 
 class Player {
 
@@ -26,18 +20,6 @@ class Player {
         c.fillStyle = this.colour;
         c.fill();
         c.stroke();
-
-    }
-
-    oscillate() {
-
-        var randomColour = Math.floor(Math.random() * 16777215).toString(16);
-
-        setTimeout(() => {
-            c.fillStyle = "#" + randomColour;
-            c.fill();
-            c.stroke();
-        }, 1000)
 
     }
 
