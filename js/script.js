@@ -19,11 +19,39 @@ class Player {
         c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
         c.fillStyle = this.colour;
         c.fill();
-        c.stroke();
 
     }
 
 }
+
+class Fire {
+
+    constructor(x, y, radius, colour, velocity) {
+        
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.colour = colour;
+        this.velocity = velocity;
+
+    }
+
+    draw() {
+
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        c.fillStyle = this.colour;
+        c.fill();
+
+    }
+}
+
+//Event Listeners 
+canvas.addEventListener('click', (event) =>{
+    
+    console.log(event)
+
+});
 
 
 //Functions
@@ -50,6 +78,12 @@ function randomEnemies() {
     const enemy = new Player(randomX, randomY, randomSize, randomColour)
     enemy.draw();
 
+    setInterval(() =>{
+        c.clear();
+
+
+    },1000);
+
 }
 
 function drawPlayer() {
@@ -64,3 +98,9 @@ function drawPlayer() {
 
 //Start game
 drawPlayer();
+
+//Create enemy
+
+//anime same emeny 
+
+//collisation detect
