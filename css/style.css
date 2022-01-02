@@ -1,8 +1,10 @@
 body {
     background-color: black;
+    margin: 0px!important;
+    padding: 0px!important;
 }
 
 #mainCanvas {
     background-color: antiquewhite;
-    width: 100%;
+    
 }

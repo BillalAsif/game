@@ -1,6 +1,7 @@
 
 var canvas = document.getElementById("mainCanvas");
 var c = canvas.getContext("2d");
+resize();
 
 class Player {
 
@@ -24,10 +25,10 @@ class Player {
 
 }
 
-class Fire {
+class Missile {
 
     constructor(x, y, radius, colour, velocity) {
-        
+
         this.x = x;
         this.y = y;
         this.radius = radius;
@@ -44,17 +45,41 @@ class Fire {
         c.fill();
 
     }
+
+    update() {
+
+        this.draw();
+        this.x = this.x + this.velocity.x;
+        this.y = this.y + this.velocity.y;
+
+    }
 }
 
 //Event Listeners 
-canvas.addEventListener('click', (event) =>{
-    
-    console.log(event)
+canvas.addEventListener('click', () => {
+
+    animate();
+
 
 });
 
+const fireMissile = new Missile(canvas.width / 2, canvas.height / 2, 5, "black", { x: 1, y: 1 });
+const fireMissile2 = new Missile(canvas.width / 2, canvas.height / 2, 5, "blue", { x: 20, y: 20 });
+
+
+const fireMultipleMissiles = [fireMissile, fireMissile2];
+
 
 //Functions
+function animate() {
+
+    requestAnimationFrame(animate);
+    fireMultipleMissiles.forEach((missile) => {
+        missile.update();
+    })
+
+}
+
 function resize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -63,7 +88,7 @@ function resize() {
 function randomEnemies() {
 
     let randomNum = () => {
-        const arr = [16,17,18,19,20,21,22,23,24,25];
+        const arr = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
         const random = Math.floor(Math.random() * 10);
         const randomArr = arr[random];
         return randomArr;
@@ -78,11 +103,11 @@ function randomEnemies() {
     const enemy = new Player(randomX, randomY, randomSize, randomColour)
     enemy.draw();
 
-    setInterval(() =>{
+    setInterval(() => {
         c.clear();
 
 
-    },1000);
+    }, 1000);
 
 }
 
@@ -101,6 +126,6 @@ drawPlayer();
 
 //Create enemy
 
-//anime same emeny 
+//anime same emeny
 
 //collisation detect
