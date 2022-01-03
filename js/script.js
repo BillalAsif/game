@@ -55,6 +55,37 @@ class Missile {
     }
 }
 
+//complete code
+class Enemies {
+
+    constructor(x, y, radius, colour, velocity) {
+
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.colour = colour;
+        this.velocity = velocity;
+
+    }
+
+    draw() {
+
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        c.fillStyle = this.colour;
+        c.fill();
+
+    }
+
+    update() {
+
+        this.draw();
+        this.x = this.x + this.velocity.x;
+        this.y = this.y + this.velocity.y;
+
+    }
+}
+
 //Event Listeners 
 canvas.addEventListener('click', (event) => {
 
@@ -87,6 +118,7 @@ function resize() {
     canvas.height = window.innerHeight;
 }
 
+//complete code with Enemies class
 function randomEnemies() {
 
     let randomNum = () => {
