@@ -56,24 +56,26 @@ class Missile {
 }
 
 //Event Listeners 
-canvas.addEventListener('click', () => {
+canvas.addEventListener('click', (event) => {
 
+    const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
+    const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
+    fireMultipleMissiles.push(new Missile(canvas.width / 2, canvas.height / 2, 2, "blue", velocity));
     animate();
 
 
 });
 
-const fireMissile = new Missile(canvas.width / 2, canvas.height / 2, 5, "black", { x: 1, y: 1 });
-const fireMissile2 = new Missile(canvas.width / 2, canvas.height / 2, 5, "blue", { x: 20, y: 20 });
 
-
-const fireMultipleMissiles = [fireMissile, fireMissile2];
+const fireMultipleMissiles = [];
 
 
 //Functions
 function animate() {
 
     requestAnimationFrame(animate);
+    c.clearRect(0, 0, canvas.width, canvas.height);
+    drawPlayer();
     fireMultipleMissiles.forEach((missile) => {
         missile.update();
     })
