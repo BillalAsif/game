@@ -92,23 +92,35 @@ canvas.addEventListener('click', (event) => {
     const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
     fireMultipleMissiles.push(new Missile(canvas.width / 2, canvas.height / 2, 2, "blue", velocity));
-    animate();
+    animateMissiles();
 
 
 });
 
 
 const fireMultipleMissiles = [];
+const enemyApproach = [];
 
 
 //Functions
-function animate() {
+function animateMissiles() {
 
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animateMissiles);
     c.clearRect(0, 0, canvas.width, canvas.height);
     drawPlayer();
     fireMultipleMissiles.forEach((missile) => {
         missile.update();
+    })
+
+}
+
+function animateEnemies() {
+
+    requestAnimationFrame(animateEnemies);
+    c.clearRect(0, 0, canvas.width, canvas.height);
+    drawPlayer();
+    enemyApproach.forEach((enemy) => {
+        enemy.update();
     })
 
 }
@@ -121,27 +133,23 @@ function resize() {
 //complete code with Enemies class
 function randomEnemies() {
 
-    let randomNum = () => {
+    const randomNum = () => {
         const arr = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
         const random = Math.floor(Math.random() * 10);
         const randomArr = arr[random];
         return randomArr;
     }
-    const randomX = Math.floor(window.innerHeight / Math.floor(Math.random() * 10));
-    const randomY = Math.floor(window.innerWidth / Math.floor(Math.random() * 10));
+    const x = canvas.width;
+    const y = canvas.height;
     const randomSize = randomNum();
     const randomSixDigit = Math.floor(Math.random() * 16777215).toString(16);
     const randomColour = "#" + randomSixDigit;
 
     //creates circles randomly
-    const enemy = new Player(randomX, randomY, randomSize, randomColour)
-    enemy.draw();
-
-    setInterval(() => {
-        c.clear();
-
-
-    }, 1000);
+    const angle = Math.atan2(canvas.height / 2, canvas.width / 2)
+    const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
+    enemyApproach.push(new Enemies(canvas.width, canvas.height, randomSize, randomColour, velocity));
+    animateEnemies();
 
 }
 
