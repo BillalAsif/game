@@ -80,8 +80,8 @@ class Enemies {
     update() {
 
         this.draw();
-        this.x = this.x + this.velocity.x;
-        this.y = this.y + this.velocity.y;
+        this.x = this.x -this.velocity.x;
+        this.y = this.y - this.velocity.y;
 
     }
 }
@@ -93,7 +93,6 @@ canvas.addEventListener('click', (event) => {
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
     fireMultipleMissiles.push(new Missile(canvas.width / 2, canvas.height / 2, 2, "blue", velocity));
     animateMissiles();
-
 
 });
 
@@ -139,16 +138,16 @@ function randomEnemies() {
         const randomArr = arr[random];
         return randomArr;
     }
-    const x = canvas.width;
-    const y = canvas.height;
+
+
     const randomSize = randomNum();
     const randomSixDigit = Math.floor(Math.random() * 16777215).toString(16);
     const randomColour = "#" + randomSixDigit;
-
-    //creates circles randomly
-    const angle = Math.atan2(canvas.height / 2, canvas.width / 2)
+    const x = canvas.width / 2 +20;
+    const y = canvas.height / 2 + 200;
+    const angle = Math.atan2(y - canvas.height / 2, x - canvas.width /2)
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
-    enemyApproach.push(new Enemies(canvas.width, canvas.height, randomSize, randomColour, velocity));
+    enemyApproach.push(new Enemies(x, y, randomSize, randomColour, velocity));
     animateEnemies();
 
 }
