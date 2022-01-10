@@ -92,6 +92,7 @@ canvas.addEventListener('click', (event) => {
     const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
     fireMultipleMissiles.push(new Missile(canvas.width / 2, canvas.height / 2, 2, "blue", velocity));
+    console.log(event.x, event.y);
     animateMissiles();
 
 });
@@ -143,8 +144,8 @@ function randomEnemies() {
     const randomSize = randomNum();
     const randomSixDigit = Math.floor(Math.random() * 16777215).toString(16);
     const randomColour = "#" + randomSixDigit;
-    const x = canvas.width / 2 +20;
-    const y = canvas.height / 2 + 200;
+    const x = canvas.width / 2 + Math.floor(Math.random() * 100);
+    const y = canvas.height / 2 + Math.floor(Math.random() * 100);
     const angle = Math.atan2(y - canvas.height / 2, x - canvas.width /2)
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
     enemyApproach.push(new Enemies(x, y, randomSize, randomColour, velocity));
