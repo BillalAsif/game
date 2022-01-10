@@ -147,6 +147,7 @@ function randomEnemies() {
     const y = Math.random() * 2000;
     const angle = Math.atan2(y - canvas.height / 2, x - canvas.width / 2)
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
+
     enemyApproach.push(new Enemies(x, y, randomSize, randomColour, velocity));
     animateEnemies();
 
@@ -162,23 +163,12 @@ function drawPlayer() {
 
 }
 
-
-function enemyLoop(i) {
-    setTimeout(function () {
-        randomEnemies();
-    }, 2000 * i);
-}
-
 //Start game
 drawPlayer();
 var gameStatus = false;
 
 //Create enemy
-let i = 0;
-while (i < 10) {
-    enemyLoop(i);
-    i++;
-}
+setInterval(randomEnemies, 1000);
 
 //anime same emeny
 
