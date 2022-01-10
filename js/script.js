@@ -80,7 +80,7 @@ class Enemies {
     update() {
 
         this.draw();
-        this.x = this.x -this.velocity.x;
+        this.x = this.x - this.velocity.x;
         this.y = this.y - this.velocity.y;
 
     }
@@ -140,13 +140,12 @@ function randomEnemies() {
         return randomArr;
     }
 
-
     const randomSize = randomNum();
     const randomSixDigit = Math.floor(Math.random() * 16777215).toString(16);
     const randomColour = "#" + randomSixDigit;
-    const x = Math.random() * 1000;
-    const y = Math.random() * 1000;
-    const angle = Math.atan2(y - canvas.height / 2, x - canvas.width /2)
+    const x = Math.random() * 2000;
+    const y = Math.random() * 2000;
+    const angle = Math.atan2(y - canvas.height / 2, x - canvas.width / 2)
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
     enemyApproach.push(new Enemies(x, y, randomSize, randomColour, velocity));
     animateEnemies();
@@ -163,10 +162,23 @@ function drawPlayer() {
 
 }
 
+
+function enemyLoop(i) {
+    setTimeout(function () {
+        randomEnemies();
+    }, 2000 * i);
+}
+
 //Start game
 drawPlayer();
-randomEnemies()
+var gameStatus = false;
+
 //Create enemy
+let i = 0;
+while (i < 10) {
+    enemyLoop(i);
+    i++;
+}
 
 //anime same emeny
 
