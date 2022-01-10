@@ -144,8 +144,8 @@ function randomEnemies() {
     const randomSize = randomNum();
     const randomSixDigit = Math.floor(Math.random() * 16777215).toString(16);
     const randomColour = "#" + randomSixDigit;
-    const x = canvas.width / 2 + Math.floor(Math.random() * 100);
-    const y = canvas.height / 2 + Math.floor(Math.random() * 100);
+    const x = Math.random() * 1000;
+    const y = Math.random() * 1000;
     const angle = Math.atan2(y - canvas.height / 2, x - canvas.width /2)
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
     enemyApproach.push(new Enemies(x, y, randomSize, randomColour, velocity));
@@ -165,7 +165,7 @@ function drawPlayer() {
 
 //Start game
 drawPlayer();
-
+randomEnemies()
 //Create enemy
 
 //anime same emeny
