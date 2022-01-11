@@ -106,12 +106,22 @@ function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, canvas.width, canvas.height);
     drawPlayer();
+
     fireMultipleMissiles.forEach((missile) => {
         missile.update();
     })
-    drawPlayer();
+
     enemyApproach.forEach((enemy) => {
         enemy.update();
+
+        fireMultipleMissiles.forEach((missile) => {
+            const distance = Math.hypot(missile.x - enemy.x, missile.y - enemy.y);
+            if (distance - enemy.radius - missile.radius < 1) {
+                console.log("Remove from screen")
+            }
+
+        })
+
     })
 
 }
