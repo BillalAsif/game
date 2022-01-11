@@ -92,8 +92,6 @@ canvas.addEventListener('click', (event) => {
     const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
     fireMultipleMissiles.push(new Missile(canvas.width / 2, canvas.height / 2, 2, "blue", velocity));
-    console.log(event.x, event.y);
-    animateMissiles();
 
 });
 
@@ -103,21 +101,14 @@ const enemyApproach = [];
 
 
 //Functions
-function animateMissiles() {
+function animate() {
 
-    requestAnimationFrame(animateMissiles);
+    requestAnimationFrame(animate);
     c.clearRect(0, 0, canvas.width, canvas.height);
     drawPlayer();
     fireMultipleMissiles.forEach((missile) => {
         missile.update();
     })
-
-}
-
-function animateEnemies() {
-
-    requestAnimationFrame(animateEnemies);
-    c.clearRect(0, 0, canvas.width, canvas.height);
     drawPlayer();
     enemyApproach.forEach((enemy) => {
         enemy.update();
@@ -149,7 +140,6 @@ function randomEnemies() {
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
 
     enemyApproach.push(new Enemies(x, y, randomSize, randomColour, velocity));
-    animateEnemies();
 
 }
 
@@ -165,6 +155,8 @@ function drawPlayer() {
 
 //Start game
 drawPlayer();
+animate();
+animate(); //2x speed
 var gameStatus = false;
 
 //Create enemy
