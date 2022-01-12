@@ -116,8 +116,11 @@ function animate() {
 
         fireMultipleMissiles.forEach((missile) => {
             const distance = Math.hypot(missile.x - enemy.x, missile.y - enemy.y);
-            if (distance - enemy.radius - missile.radius < 1) {
-                console.log("Remove from screen")
+            if (distance - (enemy.radius - missile.radius) < 1) {
+                
+                enemyApproach.pop(enemy);
+                fireMultipleMissiles.pop(missile);
+               
             }
 
         })
