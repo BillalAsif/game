@@ -2,7 +2,9 @@
 var canvas = document.getElementById("mainCanvas");
 var c = canvas.getContext("2d");
 resize();
-var score = 0;
+
+var score = document.getElementById("score");
+score.textContent = 0;
 
 class Player {
 
@@ -121,7 +123,7 @@ function animate() {
                 
                 enemyApproach.splice(enemyApproach.indexOf(enemy), 1);
                 fireMultipleMissiles.splice(fireMultipleMissiles.indexOf(missile), 1);
-                score = score + 1;
+                score.textContent = parseInt(score.textContent) + 1;
                
             }
 
