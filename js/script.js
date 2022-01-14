@@ -2,9 +2,10 @@
 var canvas = document.getElementById("mainCanvas");
 var c = canvas.getContext("2d");
 resize();
+//Create enemy
+let startGame = setInterval(randomEnemies, 1000);
 
-var score = document.getElementById("score");
-score.textContent = 0;
+
 
 class Player {
 
@@ -86,8 +87,20 @@ class Enemies {
         this.x = this.x - this.velocity.x;
         this.y = this.y - this.velocity.y;
 
+        if (this.x < (canvas.width / 2) && this. y < (canvas.height / 2)) {
+    
+            alert("Game Over!");
+            clearInterval(startGame);//fix this
+    
+        }
+
     }
 }
+
+
+const fireMultipleMissiles = [];
+const enemyApproach = [];
+
 
 //Event Listeners 
 canvas.addEventListener('click', (event) => {
@@ -97,11 +110,6 @@ canvas.addEventListener('click', (event) => {
     fireMultipleMissiles.push(new Missile(canvas.width / 2, canvas.height / 2, 2, "blue", velocity));
 
 });
-
-
-const fireMultipleMissiles = [];
-const enemyApproach = [];
-
 
 //Functions
 function animate() {
@@ -118,13 +126,13 @@ function animate() {
         enemy.update();
 
         fireMultipleMissiles.forEach((missile) => {
+
             const distance = Math.hypot(missile.x - enemy.x, missile.y - enemy.y);
+
             if (distance - (enemy.radius - missile.radius) < 1) {
-                
                 enemyApproach.splice(enemyApproach.indexOf(enemy), 1);
                 fireMultipleMissiles.splice(fireMultipleMissiles.indexOf(missile), 1);
                 score.textContent = parseInt(score.textContent) + 1;
-               
             }
 
         })
@@ -160,6 +168,14 @@ function randomEnemies() {
 
 }
 
+var score = document.getElementById("score");
+score.textContent = 0;
+
+//Start game
+drawPlayer();
+animate();
+animate(); //2x speed
+
 function drawPlayer() {
 
     let x = canvas.width / 2;
@@ -170,12 +186,3 @@ function drawPlayer() {
 
 }
 
-
-//Start game
-drawPlayer();
-animate();
-animate(); //2x speed
-var gameStatus = false;
-
-//Create enemy
-setInterval(randomEnemies, 1000);

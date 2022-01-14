@@ -13,3 +13,8 @@ body {
     background-color: dimgray;
     text-align: center;
 }
+
+.instruction {
+    color: white;
+    text-align: center;
+}
