@@ -87,7 +87,7 @@ class Enemies {
         this.x = this.x - this.velocity.x;
         this.y = this.y - this.velocity.y;
 
-        if (this.x < (canvas.width / 2) && this. y < (canvas.height / 2)) {
+        if (this.x < canvas.height / 2 || this.x < canvas.width / 2 && this.y < canvas.height /2 || this.y < canvas.width / 2) {//fix this
     
             alert("Game Over!");
             clearInterval(startGame);//fix this
