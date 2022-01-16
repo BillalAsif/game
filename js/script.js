@@ -1,4 +1,3 @@
-
 var canvas = document.getElementById("mainCanvas");
 var c = canvas.getContext("2d");
 resize();
@@ -82,7 +81,6 @@ class Enemies {
         this.draw();
         this.x = this.x - this.velocity.x;
         this.y = this.y - this.velocity.y;
-        console.log(this.x, this.y);
 
     }
 }
@@ -96,7 +94,6 @@ canvas.addEventListener('click', (event) => {
     const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
     fireMultipleMissiles.push(new Missile(canvas.width / 2, canvas.height / 2, 2, "blue", velocity));
-    console.log(event.x, event.y);
 
 });
 
@@ -118,6 +115,12 @@ function animate() {
         if(enemy.x > 495 && enemy.x < 496 && enemy.y > 292 && enemy.y < 293) {
 
             alert("Game Over!");
+            if(confirm) {
+
+                c.clearRect(0, 0, canvas.width, canvas.height);
+                clearInterval(startGame);
+
+            }
 
         }
 
@@ -183,4 +186,5 @@ function drawPlayer() {
     player.draw();
 
 }
+
 
