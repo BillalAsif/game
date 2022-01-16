@@ -5,8 +5,6 @@ resize();
 //Create enemy
 let startGame = setInterval(randomEnemies, 1000);
 
-
-
 class Player {
 
     constructor(x, y, radius, colour) {
@@ -87,16 +85,8 @@ class Enemies {
         this.x = this.x - this.velocity.x;
         this.y = this.y - this.velocity.y;
 
-        if (this.x < canvas.height / 2 || this.x < canvas.width / 2 && this.y < canvas.height /2 || this.y < canvas.width / 2) {//fix this
-    
-            alert("Game Over!");
-            clearInterval(startGame);//fix this
-    
-        }
-
     }
 }
-
 
 const fireMultipleMissiles = [];
 const enemyApproach = [];
@@ -124,6 +114,13 @@ function animate() {
 
     enemyApproach.forEach((enemy) => {
         enemy.update();
+
+        if (enemy.clientX < canvas.width / 2 && enemy.clientY < canvas.height / 2) {//fix this
+
+            clearInterval(startGame);//fix this
+            alert("Game Over!");
+    
+        }
 
         fireMultipleMissiles.forEach((missile) => {
 
