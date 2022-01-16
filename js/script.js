@@ -2,8 +2,6 @@
 var canvas = document.getElementById("mainCanvas");
 var c = canvas.getContext("2d");
 resize();
-//Create enemy
-let startGame = setInterval(randomEnemies, 1000);
 
 class Player {
 
@@ -84,6 +82,7 @@ class Enemies {
         this.draw();
         this.x = this.x - this.velocity.x;
         this.y = this.y - this.velocity.y;
+        console.log(this.x, this.y);
 
     }
 }
@@ -91,13 +90,13 @@ class Enemies {
 const fireMultipleMissiles = [];
 const enemyApproach = [];
 
-
-//Event Listeners 
+//Event Listeners - swpans missiles on click
 canvas.addEventListener('click', (event) => {
 
     const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
     fireMultipleMissiles.push(new Missile(canvas.width / 2, canvas.height / 2, 2, "blue", velocity));
+    console.log(event.x, event.y);
 
 });
 
@@ -113,15 +112,16 @@ function animate() {
     })
 
     enemyApproach.forEach((enemy) => {
+        
         enemy.update();
+        
+        if(enemy.x > 495 && enemy.x < 496 && enemy.y > 292 && enemy.y < 293) {
 
-        if (enemy.clientX < canvas.width / 2 && enemy.clientY < canvas.height / 2) {//fix this
-
-            clearInterval(startGame);//fix this
             alert("Game Over!");
-    
+
         }
 
+        //delete enemy on misile impact
         fireMultipleMissiles.forEach((missile) => {
 
             const distance = Math.hypot(missile.x - enemy.x, missile.y - enemy.y);
@@ -138,12 +138,13 @@ function animate() {
 
 }
 
+//resize canvas on refresh
 function resize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
 
-//complete code with Enemies class
+//spawns random enemies which drift towards the center of canvas
 function randomEnemies() {
 
     const randomNum = () => {
@@ -165,19 +166,19 @@ function randomEnemies() {
 
 }
 
+//Score keeping
 var score = document.getElementById("score");
 score.textContent = 0;
 
 //Start game
 drawPlayer();
 animate();
-animate(); //2x speed
+let startGame = setInterval(randomEnemies, 1000);
 
 function drawPlayer() {
 
     let x = canvas.width / 2;
     let y = canvas.height / 2;
-    //Player start position
     const player = new Player(x, y, 20, "red");
     player.draw();
 
