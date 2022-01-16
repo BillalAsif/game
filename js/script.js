@@ -1,6 +1,8 @@
 var canvas = document.getElementById("mainCanvas");
 var c = canvas.getContext("2d");
 resize();
+let startGame = setInterval(randomEnemies, 1000);
+startGame;
 
 class Player {
 
@@ -117,8 +119,8 @@ function animate() {
             alert("Game Over!");
             if(confirm) {
 
+                endGame();
                 c.clearRect(0, 0, canvas.width, canvas.height);
-                clearInterval(startGame);
 
             }
 
@@ -138,6 +140,12 @@ function animate() {
         })
 
     })
+
+}
+
+function endGame() {
+
+    clearInterval(startGame);
 
 }
 
@@ -176,7 +184,6 @@ score.textContent = 0;
 //Start game
 drawPlayer();
 animate();
-let startGame = setInterval(randomEnemies, 1000);
 
 function drawPlayer() {
 
