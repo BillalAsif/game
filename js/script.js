@@ -1,8 +1,8 @@
 var canvas = document.getElementById("mainCanvas");
 var c = canvas.getContext("2d");
 resize();
-let startGame = setInterval(randomEnemies, 1000);
-startGame;
+let startGame = () => { setInterval(randomEnemies, 1000); }
+startGame();
 
 class Player {
 
@@ -104,7 +104,10 @@ function animate() {
 
     requestAnimationFrame(animate);
     c.clearRect(0, 0, canvas.width, canvas.height);
-    drawPlayer();
+    const x = canvas.width / 2;
+    const y = canvas.height / 2;
+    let player = new Player(x, y, 20, "red");
+    player.draw();
 
     fireMultipleMissiles.forEach((missile) => {
         missile.update();
@@ -113,17 +116,12 @@ function animate() {
     enemyApproach.forEach((enemy) => {
         
         enemy.update();
-        
-        if(enemy.x > 495 && enemy.x < 496 && enemy.y > 292 && enemy.y < 293) {
 
-            alert("Game Over!");
-            if(confirm) {
+        //end game on collision with player and enemy
+        const distance = Math.hypot(player.x - enemy.x, player.y - enemy.y);
 
-                endGame();
-                c.clearRect(0, 0, canvas.width, canvas.height);
-
-            }
-
+        if (distance - (player.radius - enemy.radius) < 1) {
+            alert("End Game!")
         }
 
         //delete enemy on misile impact
@@ -182,16 +180,6 @@ var score = document.getElementById("score");
 score.textContent = 0;
 
 //Start game
-drawPlayer();
 animate();
-
-function drawPlayer() {
-
-    let x = canvas.width / 2;
-    let y = canvas.height / 2;
-    const player = new Player(x, y, 20, "red");
-    player.draw();
-
-}
 
 
