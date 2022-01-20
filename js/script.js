@@ -1,11 +1,16 @@
+var gameOn = true;
 var canvas = document.getElementById("mainCanvas");
 var c = canvas.getContext("2d");
+var myReq;
 resize();
-let startGame = () => { setInterval(randomEnemies, 1000); }
-startGame();
+
+
 //Score keeping
 var score = document.getElementById("score");
 score.textContent = 0;
+
+//start game
+gameStatusToogle();
 
 class Player {
 
@@ -103,9 +108,21 @@ canvas.addEventListener('click', (event) => {
 });
 
 //Functions
+function gameStatusToogle() { 
+
+    if(gameOn == true) {
+        intervalId = setInterval(randomEnemies, 1000); 
+    } else if(gameOn == false) {
+        clearInterval(intervalId);
+        cancelAnimationFrame(myReq);
+        alert("Game Over! Your score is: " + score.textContent);
+    }
+
+}
+
 function animate() {
 
-    requestAnimationFrame(animate);
+    myReq = requestAnimationFrame(animate);
     c.clearRect(0, 0, canvas.width, canvas.height);
     const x = canvas.width / 2;
     const y = canvas.height / 2;
@@ -124,9 +141,8 @@ function animate() {
         const distance = Math.hypot(player.x - enemy.x, player.y - enemy.y);
 
         if (distance - (player.radius + enemy.radius) < 1) {
-            alert("Game Over! You scored: " + score.textContent);
-            score.textContent = 0;
-            
+            gameOn = false;           
+            gameStatusToogle();
         }
 
         //delete enemy on misile impact
@@ -143,12 +159,6 @@ function animate() {
         })
 
     })
-
-}
-
-function endGame() {
-
-    clearInterval(startGame);
 
 }
 
@@ -183,5 +193,3 @@ function randomEnemies() {
 
 //Start game
 animate();
-
-
