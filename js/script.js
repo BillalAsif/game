@@ -113,9 +113,14 @@ function gameStatusToogle() {
     if(gameOn == true) {
         intervalId = setInterval(randomEnemies, 1000); 
     } else if(gameOn == false) {
+
         clearInterval(intervalId);
         cancelAnimationFrame(myReq);
         alert("Game Over! Your score is: " + score.textContent);
+        score.textContent = 0;
+        gameOn = true;
+        c.clearRect(0, 0, canvas.width, canvas.height);
+        location.reload();
     }
 
 }
