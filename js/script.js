@@ -3,6 +3,9 @@ var c = canvas.getContext("2d");
 resize();
 let startGame = () => { setInterval(randomEnemies, 1000); }
 startGame();
+//Score keeping
+var score = document.getElementById("score");
+score.textContent = 0;
 
 class Player {
 
@@ -120,8 +123,10 @@ function animate() {
         //end game on collision with player and enemy
         const distance = Math.hypot(player.x - enemy.x, player.y - enemy.y);
 
-        if (distance - (player.radius - enemy.radius) < 1) {
-            alert("End Game!")
+        if (distance - (player.radius + enemy.radius) < 1) {
+            alert("Game Over! You scored: " + score.textContent);
+            score.textContent = 0;
+            
         }
 
         //delete enemy on misile impact
@@ -175,9 +180,6 @@ function randomEnemies() {
 
 }
 
-//Score keeping
-var score = document.getElementById("score");
-score.textContent = 0;
 
 //Start game
 animate();
