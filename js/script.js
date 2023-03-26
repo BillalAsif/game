@@ -103,16 +103,16 @@ canvas.addEventListener('click', (event) => {
 
     const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
     const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
-    fireMultipleMissiles.push(new Missile(canvas.width / 2, canvas.height / 2, 2, "blue", velocity));
+    fireMultipleMissiles.push(new Missile(canvas.width / 2, canvas.height / 2, 2, "yellow", velocity));
 
 });
 
 //Functions
-function gameStatusToogle() { 
+function gameStatusToogle() {
 
-    if(gameOn == true) {
-        intervalId = setInterval(randomEnemies, 1000); 
-    } else if(gameOn == false) {
+    if (gameOn == true) {
+        intervalId = setInterval(randomEnemies, 1000);
+    } else if (gameOn == false) {
 
         clearInterval(intervalId);
         cancelAnimationFrame(myReq);
@@ -131,7 +131,7 @@ function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
     const x = canvas.width / 2;
     const y = canvas.height / 2;
-    let player = new Player(x, y, 20, "red");
+    let player = new Player(x, y, 20, "transparent");
     player.draw();
 
     fireMultipleMissiles.forEach((missile) => {
@@ -139,14 +139,14 @@ function animate() {
     })
 
     enemyApproach.forEach((enemy) => {
-        
+
         enemy.update();
 
         //end game on collision with player and enemy
         const distance = Math.hypot(player.x - enemy.x, player.y - enemy.y);
 
         if (distance - (player.radius + enemy.radius) < 1) {
-            gameOn = false;           
+            gameOn = false;
             gameStatusToogle();
         }
 

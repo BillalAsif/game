@@ -1,20 +1,43 @@
 body {
-    background-color: black;
-    margin: 0px!important;
-    padding: 0px!important;
+    padding: 0px !important;
+    margin: 0px !important;
 }
 
+@keyframes slidein {
+    from {
+        background-position: top;
+        background-size: 1000px;
+    }
+
+    to {
+        background-position: -100px 0px;
+        background-size: 2750px;
+    }
+
+}
+
+
 #mainCanvas {
-    background-color: antiquewhite;
-    
+    background-image: url('/images/bg.jpg');
+    background-size: cover;
+    animation: slidein 100s forwards infinite alternate;
 }
 
 .score {
-    background-color: dimgray;
+    font-size: 20px;
+    background-color: black;
+    color: white;
     text-align: center;
 }
 
 .instruction {
     color: white;
     text-align: center;
+}
+
+img {
+    position: absolute;
+    top: 52%;
+    left: 45%;
+    width: 80px;
 }
