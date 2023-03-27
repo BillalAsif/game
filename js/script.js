@@ -131,7 +131,7 @@ function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
     const x = canvas.width / 2;
     const y = canvas.height / 2;
-    let player = new Player(x, y, 20, "transparent");
+    let player = new Player(x, y, 35, "transparent");
     player.draw();
 
     fireMultipleMissiles.forEach((missile) => {
@@ -195,6 +195,11 @@ function randomEnemies() {
 
 }
 
+// Player img position
+let playerImg = document.getElementById("playerImg");
+playerImg.style.position = "absolute";
+playerImg.style.top = (canvas.height / 2) - 5 + "px";
+playerImg.style.left = (canvas.width / 2) - 50 + "px";
 
 //Start game
 animate();

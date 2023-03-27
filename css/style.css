@@ -34,10 +34,3 @@ body {
     color: white;
     text-align: center;
 }
-
-img {
-    position: absolute;
-    top: 52%;
-    left: 45%;
-    width: 80px;
-}
